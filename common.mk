@@ -13,6 +13,7 @@
 # limitations under the License.
 
 QCOM_COMMON_PATH := device/qcom/common
+TARGET_FWK_SUPPORTS_FULL_VALUEADDS ?= true
 
 ifeq ($(TARGET_BOARD_PLATFORM),)
 $(error "TARGET_BOARD_PLATFORM is not defined yet, please define in your device makefile so it's accessible to QCOM common.")
@@ -142,6 +143,7 @@ TARGET_KERNEL_VERSION ?= 3.18
 endif
 
 ifeq ($(call is-board-platform-in-list,$(QCOM_BOARD_PLATFORMS)),true)
+
 ifeq ($(TARGET_FWK_SUPPORTS_FULL_VALUEADDS),true)
 # Compatibility matrix
 DEVICE_MATRIX_FILE += \
@@ -149,6 +151,9 @@ DEVICE_MATRIX_FILE += \
 
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
     vendor/qcom/opensource/core-utils/vendor_framework_compatibility_matrix.xml
+
+PRODUCT_PROPERTY_OVERRIDES += ro.vendor.qti.va_aosp.support=1
+PRODUCT_ODM_PROPERTIES += ro.vendor.qti.va_odm.support=1
 endif
 
 # Components
@@ -189,6 +194,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libhidltransport.vendor \
     libhwbinder.vendor
+
+# QTI framework detect
+PRODUCT_PACKAGES += \
+    libqti_vndfwk_detect \
+    libqti_vndfwk_detect.vendor \
+    libvndfwk_detect_jni.qti \
+    libvndfwk_detect_jni.qti.vendor
 
 # SoC
 PRODUCT_VENDOR_PROPERTIES += \
