@@ -16,6 +16,10 @@
 DEVICE_FRAMEWORK_MANIFEST_FILE += $(QCOM_COMMON_PATH)/system/telephony/framework_manifest.xml
 SYSTEM_EXT_MANIFEST_FILES += $(QCOM_COMMON_PATH)/system/telephony/atcmdfwd-saidl.xml
 
+# APN List
+PRODUCT_COPY_FILES += \
+    $(QCOM_COMMON_PATH)/system/telephony/apns-conf.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/apns-conf.xml
+
 # Packages
 PRODUCT_PACKAGES += \
     android.hardware.radio@1.6 \
@@ -47,6 +51,10 @@ PRODUCT_SYSTEM_EXT_PROPERTIES += \
     persist.vendor.ims.disableIMSLogs=1 \
     persist.vendor.ims.disableQXDMLogs=1
 endif
+
+# Sensitive Phone Numbers list
+PRODUCT_COPY_FILES += \
+    $(QCOM_COMMON_PATH)/system/telephony/sensitive_pn.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sensitive_pn.xml
 
 # Get non-open-source specific aspects.
 $(call inherit-product-if-exists, vendor/qcom/common/system/telephony/telephony-vendor.mk)
