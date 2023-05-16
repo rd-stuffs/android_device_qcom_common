@@ -207,6 +207,11 @@ PRODUCT_PACKAGES += \
 PRODUCT_VENDOR_PROPERTIES += \
     ro.soc.manufacturer=QTI
 
+# Remote provisioning
+PRODUCT_PRODUCT_PROPERTIES += \
+    remote_provisioning.enable_rkpd=true \
+    remote_provisioning.hostname=remoteprovisioning.googleapis.com \
+
 # RFS APQ GNSS symlinks
 PRODUCT_PACKAGES += \
     rfs_apq_gnss_hlos_symlink \
