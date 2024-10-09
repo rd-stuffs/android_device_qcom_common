@@ -5,3 +5,6 @@ binder_call(vendor_hal_perf_default, vendor_hal_poweroptservice)
 hal_client_domain(vendor_hal_perf_default, vendor_hal_poweroptservice)
 
 dontaudit vendor_hal_perf_default default_android_service:service_manager find;
+
+allow vendor_hal_perf_default hal_graphics_allocator_default:dir search;
+allow vendor_hal_perf_default hal_graphics_allocator_default:file { read getattr open };
